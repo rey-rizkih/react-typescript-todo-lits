@@ -1,18 +1,15 @@
-import { Box, Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import InputFields from "./components/input-fields";
-import TodoList from "./containers/todo-list";
+import TodoList from "./components/todo-list";
 import type { Todo } from "./models/models";
 
 function App() {
-  const [todo, setTodo] = useState<string>("");
   const [todos, setTodos] = useState<Todo[]>([]);
 
-  const handleAddTodo = (e: React.FormEvent) => {
-    if (todo) {
-      setTodos([...todos, { id: Date.now(), todo, isDone: false }]);
-      setTodo("");
-    }
+  const handleAddTodo = (value: string) => {
+    setTodos([...todos, { id: Date.now(), todo: value, isDone: false }]);
   };
 
   console.log("TODOS : ", todos);
@@ -26,7 +23,7 @@ function App() {
       }}
     >
       <Typography variant="h1">Taskify</Typography>
-      <InputFields value={todo} setValue={setTodo} onSubmit={handleAddTodo} />
+      <InputFields onSubmit={handleAddTodo} />
 
       <TodoList todos={todos} setTodos={setTodos} />
     </Box>

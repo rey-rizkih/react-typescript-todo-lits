@@ -1,35 +1,41 @@
-import { Button, Input, styled } from "@mui/material";
-import { useRef } from "react";
+import { styled } from "@mui/material";
+import Button from "@mui/material/Button";
+import { useRef, useState } from "react";
+import { InputStyled } from "./input";
 
 export interface InputFieldsProps {
-  value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
-  onSubmit: (e: React.FormEvent) => void;
+  defaultValue?: string;
+  onSubmit: (value: string) => void;
 }
 
-const InputFields: React.FC<InputFieldsProps> = ({
-  value,
-  setValue,
+const InputField: React.FC<InputFieldsProps> = ({
+  defaultValue = "",
   onSubmit,
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const [inputValue, setInputValue] = useState<string>(defaultValue);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(e);
+
+    onSubmit(inputValue);
+    // Clear input value
+    setInputValue("");
+    // Blur input after submit
     inputRef.current?.blur();
   };
 
   return (
     <FormField onSubmit={handleSubmit}>
-      <InputField
+      <InputStyled
         // Pass ref to input element
         inputRef={inputRef}
         disableUnderline
         size="small"
         placeholder="Enter a Task"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
       />
       <ButtonSubmit type="submit">Go</ButtonSubmit>
     </FormField>
@@ -38,36 +44,13 @@ const InputFields: React.FC<InputFieldsProps> = ({
 
 const FormField = styled("form")(({ theme }) => ({
   display: "flex",
-  width: "90%",
+  width: "95%",
   position: "relative",
   alignItems: "center",
   [theme.breakpoints.down("md")]: {
     width: "95%",
   },
 }));
-
-const InputField = styled(Input)({
-  width: "100%",
-  borderRadius: "50px",
-  padding: "20px 30px",
-  fontSize: "25px",
-  border: "none",
-  backgroundColor: "white",
-  transition: "0.2s",
-  boxShadow: "inset 0 0 5px black",
-  fontFamily: "Arial",
-  lineHeight: "normal",
-  // Focus within childern and change parent style
-  ":focus-within": {
-    boxShadow: "0 0 10px 1000px rgba(0, 0, 0, 0.5)",
-    outline: "none",
-  },
-  // Class name for the input
-  ".MuiInput-input": {
-    padding: 0,
-    height: "auto",
-  },
-});
 
 const ButtonSubmit = styled(Button)(({ theme }) => ({
   position: "absolute",
@@ -92,4 +75,4 @@ const ButtonSubmit = styled(Button)(({ theme }) => ({
   },
 }));
 
-export default InputFields;
+export default InputField;
