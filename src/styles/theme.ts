@@ -16,9 +16,13 @@ const breakpoints: BreakpointsOptions = {
 // Palette
 const palette: PaletteOptions = {
   primary: {
-    main: "#32c3cd",
+    main: "#2f74c0",
+    light: "#388ae2",
   },
   secondary: {
+    main: "#32c3cd",
+  },
+  error: {
     main: "#eb6750",
   },
   background: {
@@ -34,6 +38,7 @@ const typography: TypographyOptions = {
     color: "white",
     fontSize: "40px",
     margin: "30px 0",
+    lineHeight: "normal",
     "@media (max-width:800px)": {
       fontSize: "35px",
       margin: "1.5rem 0",
@@ -45,4 +50,8 @@ const typography: TypographyOptions = {
   },
 };
 
-export const theme = createTheme({ breakpoints, palette, typography });
+export const theme = createTheme({
+  breakpoints,
+  palette,
+  typography,
+});
