@@ -42,7 +42,7 @@ const TodoEdit = forwardRef<HTMLInputElement, TodoEditProps>(
             onChange={handleOnInputChange}
           />
         ) : (
-          <TodoTitle isDone={todo.isDone}>{todo.todo}</TodoTitle>
+          <TodoTitle isdone={todo.isDone}>{todo.todo}</TodoTitle>
         )}
       </Box>
     );
