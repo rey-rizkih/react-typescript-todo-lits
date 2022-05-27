@@ -1,6 +1,7 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import InputField from ".";
+import renderer from "react-test-renderer";
 
 afterEach(cleanup);
 
@@ -73,4 +74,9 @@ it("Should be blur when submit", () => {
   userEvent.type(inputField, `${testValue}{enter}`);
 
   expect(inputField).not.toHaveFocus();
+});
+
+it("Matches snapshot", () => {
+  const tree = renderer.create(<InputField onSubmit={() => {}} />).toJSON();
+  expect(tree).toMatchSnapshot();
 });
