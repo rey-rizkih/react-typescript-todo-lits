@@ -2,30 +2,27 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { forwardRef, useState } from "react";
 import { TodoTitle } from "../title";
-import type { Todo } from "../../../../models/models";
 
 export interface TodoEditProps {
-  isEdit: boolean;
-  todo: Todo;
-  onSubmit: (value: Todo) => void;
+  isEdit?: boolean;
+  isDone?: boolean;
+  value: string;
+  onSubmit: (value: string) => void;
 }
 
 const TodoEdit = forwardRef<HTMLInputElement, TodoEditProps>(
-  ({ isEdit, todo, onSubmit }, inputRef) => {
-    const [editTodo, setEditTodo] = useState<Todo>(todo);
+  ({ isEdit, isDone, value, onSubmit }, inputRef) => {
+    const [editTodo, setEditTodo] = useState<string>(value);
 
     const handleOnInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setEditTodo((prev) => ({
-        ...prev,
-        todo: e.target.value,
-      }));
+      setEditTodo(e.target.value);
     };
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
 
       // Prevent a empty or only whitespace value
-      if (editTodo.todo.trim() === "") return;
+      if (editTodo.trim() === "") return;
 
       onSubmit(editTodo);
     };
@@ -40,11 +37,12 @@ const TodoEdit = forwardRef<HTMLInputElement, TodoEditProps>(
             sx={(theme) => ({
               backgroundColor: theme.palette.background.paper,
             })}
-            value={editTodo.todo}
+            value={editTodo}
             onChange={handleOnInputChange}
           />
         ) : (
-          <TodoTitle isdone={todo.isDone}>{todo.todo}</TodoTitle>
+          // Show Title when isEdit false
+          <TodoTitle isDone={isDone}>{value}</TodoTitle>
         )}
       </Box>
     );

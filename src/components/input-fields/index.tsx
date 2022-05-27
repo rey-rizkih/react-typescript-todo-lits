@@ -19,6 +19,7 @@ const InputField: React.FC<InputFieldsProps> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Prevent a empty or only whitespace value
     if (inputValue.trim() === "") return;
 
     onSubmit(inputValue);

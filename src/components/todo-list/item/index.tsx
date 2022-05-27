@@ -1,77 +1,69 @@
 import { styled } from "@mui/system";
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Draggable } from "react-beautiful-dnd";
 import type { Todo } from "../../../models/models";
 import TodoAction from "./action";
 import TodoEdit from "./edit";
 
-interface TodoItemContainerProps {
-  isdragging?: boolean;
+export interface TodoItemActionsProps {
+  onEdit: (id: string, value: string) => void;
+  onDelete: (id: string) => void;
+  onDone: (id: string) => void;
 }
 
-export interface TodoItemProps extends TodoItemContainerProps {
+export interface TodoItemProps {
+  index: number;
   todo: Todo;
-  todos: Todo[];
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  actions: TodoItemActionsProps;
 }
 
-const TodoItem = forwardRef<HTMLDivElement, TodoItemProps>(
-  ({ todo, todos, setTodos, ...props }, ref) => {
-    const [isEdit, setIsEdit] = useState<boolean>(false);
+const TodoItem: React.FC<TodoItemProps> = ({
+  index,
+  todo,
+  actions: { onEdit, onDelete, onDone },
+}) => {
+  const [isEdit, setIsEdit] = useState<boolean>(false);
 
-    const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-    useEffect(() => {
-      if (isEdit) inputRef.current?.focus();
-    }, [isEdit]);
+  useEffect(() => {
+    // Focus on input when edit is triggered
+    if (isEdit) inputRef.current?.focus();
+  }, [isEdit]);
 
-    const handleIsEdit = () => {
-      setIsEdit(!isEdit);
-    };
+  const handleIsEdit = () => {
+    setIsEdit(!isEdit);
+  };
 
-    const handleEditTodo = (newTodo: Todo) => {
-      setTodos(
-        todos.map((item) => {
-          // Set value where found
-          if (item.id === todo.id) return newTodo;
+  return (
+    <Draggable draggableId={todo.id} index={index}>
+      {(provided, snapshot) => (
+        <TodoItemContainer
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
+          isDragging={snapshot.isDragging}
+        >
+          <TodoEdit
+            isEdit={isEdit}
+            isDone={todo.isDone}
+            value={todo.content}
+            onSubmit={(value) => onEdit(todo.id, value)}
+          />
 
-          return item;
-        })
-      );
+          <TodoAction
+            onEdit={handleIsEdit}
+            onDelete={() => onDelete(todo.id)}
+            onDone={() => onDone(todo.id)}
+          />
+        </TodoItemContainer>
+      )}
+    </Draggable>
+  );
+};
 
-      setIsEdit(false);
-    };
-
-    const handleDeleteTodo = () => {
-      setTodos(todos.filter((item) => item.id !== todo.id));
-    };
-
-    const handleDone = () => {
-      setTodos(
-        todos.map((item) => {
-          // Change isDone where found
-          if (item.id === todo.id) item.isDone = !item.isDone;
-
-          return item;
-        })
-      );
-    };
-
-    return (
-      <TodoItemContainer ref={ref} {...props}>
-        <TodoEdit isEdit={isEdit} todo={todo} onSubmit={handleEditTodo} />
-
-        <TodoAction
-          onEdit={handleIsEdit}
-          onDelete={handleDeleteTodo}
-          onDone={handleDone}
-        />
-      </TodoItemContainer>
-    );
-  }
-);
-
-const TodoItemContainer = styled("div")<TodoItemContainerProps>(
-  ({ isdragging }) => ({
+const TodoItemContainer = styled("div")<{ isDragging: boolean }>(
+  ({ isDragging }) => ({
     display: "flex",
     borderRadius: "5px",
     padding: "20px",
@@ -80,13 +72,13 @@ const TodoItemContainer = styled("div")<TodoItemContainerProps>(
     color: "black",
     transition: "0.2s",
 
-    // Give box shadow when dragging
-    ...(isdragging && { boxShadow: "0 0 20px black" }),
-
     ":hover": {
       boxShadow: "0 0 5px black",
       transform: "scale(1.03)",
     },
+
+    // Add box shadow when dragging
+    ...(isDragging && { boxShadow: "0 0 20px black" }),
   })
 );
 

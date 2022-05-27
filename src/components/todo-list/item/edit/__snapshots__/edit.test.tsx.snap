@@ -52,7 +52,6 @@ exports[`Matches snapshot isNotEdit 1`] = `
 >
   <p
     className="MuiTypography-root MuiTypography-body1 css-1engj9y-MuiTypography-root"
-    isdone={false}
   >
     test todo
   </p>

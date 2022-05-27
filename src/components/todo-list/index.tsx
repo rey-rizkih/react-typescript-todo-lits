@@ -1,96 +1,36 @@
-import { styled, useTheme } from "@mui/material";
-import { Draggable, Droppable } from "react-beautiful-dnd";
-import Card from "../../components/card";
-import type { Todo } from "../../models/models";
-import TodoItem from "../todo-list/item";
+import { styled } from "@mui/material";
+import type { TodoColumns, Todos } from "../../models/models";
+import TodoColumn from "./column";
+import { TodoItemActionsProps } from "./item";
+import TodoRow from "./rows";
 
 export interface TodoListProps {
-  todos: Todo[];
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-  completedTodos: Todo[];
-  setCompletedTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  columns: TodoColumns;
+  columnOrder: string[];
+  todos: Todos;
+  actions: TodoItemActionsProps;
 }
 
 const TodoList: React.FC<TodoListProps> = ({
   todos,
-  setTodos,
-  completedTodos,
-  setCompletedTodos,
+  columns,
+  columnOrder,
+  actions,
 }) => {
-  const theme = useTheme();
-
   return (
     <TodoListContainer>
-      {/* Active Task  */}
-      <Droppable droppableId="TodosList">
-        {(provided, snapshot) => (
-          <Card
-            title="Active Tasks"
-            bgcolor={
-              theme.palette.secondary[snapshot.isDraggingOver ? "dark" : "main"]
-            }
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-          >
-            {todos.map((todo, index) => (
-              <Draggable
-                key={todo.id}
-                draggableId={todo.id.toString()}
-                index={index}
-              >
-                {(provided, snapshot) => (
-                  <TodoItem
-                    todo={todo}
-                    todos={todos}
-                    setTodos={setTodos}
-                    isdragging={snapshot.isDragging}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    ref={provided.innerRef}
-                  />
-                )}
-              </Draggable>
-            ))}
-            {provided.placeholder}
-          </Card>
-        )}
-      </Droppable>
+      {columnOrder.map((columnId) => {
+        const column = columns[columnId];
 
-      {/* Complete Tasks  */}
-      <Droppable droppableId="TodosRemove">
-        {(provided, snapshot) => (
-          <Card
-            title="Competed Tasks"
-            bgcolor={
-              theme.palette.error[snapshot.isDraggingOver ? "dark" : "main"]
-            }
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-          >
-            {completedTodos.map((completedTodo, index) => (
-              <Draggable
-                key={completedTodo.id}
-                draggableId={completedTodo.id.toString()}
-                index={index}
-              >
-                {(provided, snapshot) => (
-                  <TodoItem
-                    key={completedTodo.id}
-                    todo={completedTodo}
-                    todos={completedTodos}
-                    setTodos={setCompletedTodos}
-                    isdragging={snapshot.isDragging}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    ref={provided.innerRef}
-                  />
-                )}
-              </Draggable>
-            ))}
-            {provided.placeholder}
-          </Card>
-        )}
-      </Droppable>
+        // Set todos from column rowsId
+        const todosInColumn = column.rowsId.map((rowId) => todos[rowId]);
+
+        return (
+          <TodoColumn key={columnId} column={column}>
+            <TodoRow todos={todosInColumn} actions={actions} />
+          </TodoColumn>
+        );
+      })}
     </TodoListContainer>
   );
 };

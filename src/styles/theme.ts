@@ -2,6 +2,14 @@ import type { BreakpointsOptions, PaletteOptions } from "@mui/material";
 import { createTheme } from "@mui/material";
 import type { TypographyOptions } from "@mui/material/styles/createTypography";
 
+export type ColorVariants =
+  | "primary"
+  | "secondary"
+  | "error"
+  | "warning"
+  | "info"
+  | "success";
+
 // Breakpoints
 const breakpoints: BreakpointsOptions = {
   values: {
