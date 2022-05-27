@@ -11,9 +11,8 @@ interface CardProps extends BoxProps {
 const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ title, children, ...props }, ref) => {
     return (
-      <CardContainer ref={ref} {...props}>
+      <CardContainer data-testid="card" ref={ref} {...props}>
         <Typography variant="h2">{title}</Typography>
-
         {children}
       </CardContainer>
     );

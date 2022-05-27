@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Matches snapshot 1`] = `
+<div
+  className="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-1u5vszn-MuiInputBase-root-MuiInput-root"
+  onClick={[Function]}
+>
+  <input
+    className="MuiInput-input MuiInputBase-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
+    data-testid="input"
+    onAnimationStart={[Function]}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    type="text"
+  />
+</div>
+`;

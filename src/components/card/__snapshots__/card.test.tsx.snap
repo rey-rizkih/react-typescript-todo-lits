@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Matches snapshot 1`] = `
+<div
+  className="MuiBox-root css-1ssq9ig"
+  data-testid="card"
+>
+  <h2
+    className="MuiTypography-root MuiTypography-h2 css-1sra7t5-MuiTypography-root"
+  >
+    Test
+  </h2>
+</div>
+`;
