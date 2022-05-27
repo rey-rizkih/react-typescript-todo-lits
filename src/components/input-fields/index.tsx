@@ -19,6 +19,8 @@ const InputField: React.FC<InputFieldsProps> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (inputValue.trim() === "") return;
+
     onSubmit(inputValue);
     // Clear input value
     setInputValue("");

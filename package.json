@@ -48,6 +48,7 @@
   "devDependencies": {
     "@types/react-beautiful-dnd": "^13.1.2",
     "@types/react-test-renderer": "^18.0.0",
+    "react-beautiful-dnd-test-utils": "^4.1.1",
     "react-test-renderer": "^18.1.0"
   }
 }

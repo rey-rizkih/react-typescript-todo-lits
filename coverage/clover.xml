@@ -1,21 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1653609943015" clover="3.2.0">
-  <project timestamp="1653609943015" name="All files">
-    <metrics statements="12" coveredstatements="12" conditionals="1" coveredconditionals="1" methods="5" coveredmethods="5" elements="18" coveredelements="18" complexity="0" loc="12" ncloc="12" packages="1" files="1" classes="1"/>
-    <file name="index.tsx" path="/home/haphap/Projects/Rey/react-typescript-todo-lits/src/components/input-fields/index.tsx">
-      <metrics statements="12" coveredstatements="12" conditionals="1" coveredconditionals="1" methods="5" coveredmethods="5"/>
-      <line num="11" count="1" type="stmt"/>
-      <line num="15" count="62" type="stmt"/>
-      <line num="17" count="62" type="stmt"/>
-      <line num="19" count="62" type="stmt"/>
-      <line num="20" count="4" type="stmt"/>
-      <line num="22" count="4" type="stmt"/>
-      <line num="24" count="4" type="stmt"/>
-      <line num="26" count="4" type="stmt"/>
-      <line num="29" count="62" type="stmt"/>
-      <line num="38" count="50" type="stmt"/>
-      <line num="47" count="62" type="stmt"/>
-      <line num="57" count="62" type="stmt"/>
-    </file>
+<coverage generated="1653614925849" clover="3.2.0">
+  <project timestamp="1653614925849" name="All files">
+    <metrics statements="34" coveredstatements="23" conditionals="11" coveredconditionals="7" methods="17" coveredmethods="10" elements="62" coveredelements="40" complexity="0" loc="34" ncloc="34" packages="4" files="4" classes="4"/>
+    <package name="input-fields">
+      <metrics statements="13" coveredstatements="13" conditionals="3" coveredconditionals="3" methods="5" coveredmethods="5"/>
+      <file name="index.tsx" path="/home/haphap/Projects/Rey/react-typescript-todo-lits/src/components/input-fields/index.tsx">
+        <metrics statements="13" coveredstatements="13" conditionals="3" coveredconditionals="3" methods="5" coveredmethods="5"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="15" count="65" type="stmt"/>
+        <line num="17" count="65" type="stmt"/>
+        <line num="19" count="65" type="stmt"/>
+        <line num="20" count="6" type="stmt"/>
+        <line num="22" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="24" count="4" type="stmt"/>
+        <line num="26" count="4" type="stmt"/>
+        <line num="28" count="4" type="stmt"/>
+        <line num="31" count="65" type="stmt"/>
+        <line num="40" count="51" type="stmt"/>
+        <line num="49" count="65" type="stmt"/>
+        <line num="59" count="65" type="stmt"/>
+      </file>
+    </package>
+    <package name="todo-list">
+      <metrics statements="8" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="6" coveredmethods="0"/>
+      <file name="index.tsx" path="/home/haphap/Projects/Rey/react-typescript-todo-lits/src/components/todo-list/index.tsx">
+        <metrics statements="8" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="6" coveredmethods="0"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="79" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="todo-list.item.action">
+      <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <file name="index.tsx" path="/home/haphap/Projects/Rey/react-typescript-todo-lits/src/components/todo-list/item/action/index.tsx">
+        <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="todo-list.item.edit">
+      <metrics statements="10" coveredstatements="10" conditionals="4" coveredconditionals="4" methods="5" coveredmethods="5"/>
+      <file name="index.tsx" path="/home/haphap/Projects/Rey/react-typescript-todo-lits/src/components/todo-list/item/edit/index.tsx">
+        <metrics statements="10" coveredstatements="10" conditionals="4" coveredconditionals="4" methods="5" coveredmethods="5"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="15" count="21" type="stmt"/>
+        <line num="17" count="21" type="stmt"/>
+        <line num="18" count="13" type="stmt"/>
+        <line num="24" count="21" type="stmt"/>
+        <line num="25" count="3" type="stmt"/>
+        <line num="28" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="33" count="21" type="stmt"/>
+        <line num="40" count="19" type="stmt"/>
+      </file>
+    </package>
   </project>
 </coverage>

@@ -21,11 +21,11 @@ const TodoAction: React.FC<TodoActionProps> = ({
         <Edit />
       </IconButton>
 
-      <IconButton color="inherit" aria-label="edit todo" onClick={onDelete}>
+      <IconButton color="inherit" aria-label="delete todo" onClick={onDelete}>
         <Delete />
       </IconButton>
 
-      <IconButton color="inherit" aria-label="delete todo" onClick={onDone}>
+      <IconButton color="inherit" aria-label="complete todo" onClick={onDone}>
         <Check />
       </IconButton>
     </ActionContainer>

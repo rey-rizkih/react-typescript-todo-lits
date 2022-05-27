@@ -1,5 +1,5 @@
 import { styled, useTheme } from "@mui/material";
-import { Droppable } from "react-beautiful-dnd";
+import { Draggable, Droppable } from "react-beautiful-dnd";
 import Card from "../../components/card";
 import type { Todo } from "../../models/models";
 import TodoItem from "../todo-list/item";
@@ -22,7 +22,7 @@ const TodoList: React.FC<TodoListProps> = ({
   return (
     <TodoListContainer>
       {/* Active Task  */}
-      <Droppable droppableId={`TodosList`}>
+      <Droppable droppableId="TodosList">
         {(provided, snapshot) => (
           <Card
             title="Active Tasks"
@@ -33,13 +33,23 @@ const TodoList: React.FC<TodoListProps> = ({
             {...provided.droppableProps}
           >
             {todos.map((todo, index) => (
-              <TodoItem
+              <Draggable
                 key={todo.id}
+                draggableId={todo.id.toString()}
                 index={index}
-                todo={todo}
-                todos={todos}
-                setTodos={setTodos}
-              />
+              >
+                {(provided, snapshot) => (
+                  <TodoItem
+                    todo={todo}
+                    todos={todos}
+                    setTodos={setTodos}
+                    isdragging={snapshot.isDragging}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                    ref={provided.innerRef}
+                  />
+                )}
+              </Draggable>
             ))}
             {provided.placeholder}
           </Card>
@@ -47,7 +57,7 @@ const TodoList: React.FC<TodoListProps> = ({
       </Droppable>
 
       {/* Complete Tasks  */}
-      <Droppable droppableId={`TodosRemove}`}>
+      <Droppable droppableId="TodosRemove">
         {(provided, snapshot) => (
           <Card
             title="Competed Tasks"
@@ -58,13 +68,24 @@ const TodoList: React.FC<TodoListProps> = ({
             {...provided.droppableProps}
           >
             {completedTodos.map((completedTodo, index) => (
-              <TodoItem
+              <Draggable
                 key={completedTodo.id}
+                draggableId={completedTodo.id.toString()}
                 index={index}
-                todo={completedTodo}
-                todos={completedTodos}
-                setTodos={setCompletedTodos}
-              />
+              >
+                {(provided, snapshot) => (
+                  <TodoItem
+                    key={completedTodo.id}
+                    todo={completedTodo}
+                    todos={completedTodos}
+                    setTodos={setCompletedTodos}
+                    isdragging={snapshot.isDragging}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                    ref={provided.innerRef}
+                  />
+                )}
+              </Draggable>
             ))}
             {provided.placeholder}
           </Card>

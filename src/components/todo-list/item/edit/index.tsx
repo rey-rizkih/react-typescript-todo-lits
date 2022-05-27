@@ -24,8 +24,10 @@ const TodoEdit = forwardRef<HTMLInputElement, TodoEditProps>(
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
 
-      // Prevent a white space in the beginning of a input
-      if (!/^\s/.test(editTodo.todo)) onSubmit(editTodo);
+      // Prevent a empty or only whitespace value
+      if (editTodo.todo.trim() === "") return;
+
+      onSubmit(editTodo);
     };
 
     return (
