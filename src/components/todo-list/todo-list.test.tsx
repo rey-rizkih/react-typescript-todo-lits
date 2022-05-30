@@ -60,12 +60,14 @@ afterEach(cleanup);
 it("Should render column correctly", async () => {
   renderTodoList();
 
+  // Checking column component props
   expect(mockTodoColumn).toHaveBeenCalledWith(
     expect.objectContaining({
       column: columns.active,
     })
   );
 
+  // Checking column component props
   expect(mockTodoColumn).toHaveBeenCalledWith(
     expect.objectContaining({
       column: columns.completed,
@@ -76,12 +78,14 @@ it("Should render column correctly", async () => {
 it("Should render row correctly", async () => {
   renderTodoList();
 
+  // Checking row component props
   expect(mockTodoRow).toHaveBeenCalledWith(
     expect.objectContaining({
       todos: [todos["active-1"]],
     })
   );
 
+  // Checking row component props
   expect(mockTodoRow).toHaveBeenCalledWith(
     expect.objectContaining({
       todos: [],
