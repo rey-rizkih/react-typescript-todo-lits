@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/11</span>
+                <span class='fraction'>0/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/10</span>
+                <span class='fraction'>0/10</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -127,31 +127,31 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">21x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">21x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -179,31 +179,31 @@ export interface TodoEditProps {
   onSubmit: (value: string) =&gt; void;
 }
 &nbsp;
-const TodoEdit = forwardRef&lt;HTMLInputElement, TodoEditProps&gt;(
-  ({ isEdit, isDone, value, onSubmit }, inputRef) =&gt; {
-    const [editTodo, setEditTodo] = useState&lt;string&gt;(value);
+const TodoEdit = <span class="cstat-no" title="statement not covered" >forwardRef&lt;HTMLInputElement, TodoEditProps&gt;(</span>
+<span class="fstat-no" title="function not covered" >  ({</span> isEdit, isDone, value, onSubmit }, inputRef) =&gt; {
+    const [editTodo, setEditTodo] = <span class="cstat-no" title="statement not covered" >useState&lt;string&gt;(value);</span>
 &nbsp;
-    const handleOnInputChange = (e: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {
-      setEditTodo(e.target.value);
+    const handleOnInputChange = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(e</span>: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      setEditTodo(e.target.value);</span>
     };
 &nbsp;
-    const handleSubmit = (e: React.FormEvent) =&gt; {
-      e.preventDefault();
+    const handleSubmit = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(e</span>: React.FormEvent) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      e.preventDefault();</span>
 &nbsp;
       // Prevent a empty or only whitespace value
-      if (editTodo.trim() === "") return;
+<span class="cstat-no" title="statement not covered" >      if (editTodo.trim() === "") <span class="cstat-no" title="statement not covered" >return;</span></span>
 &nbsp;
-      onSubmit(editTodo);
+<span class="cstat-no" title="statement not covered" >      onSubmit(editTodo);</span>
     };
 &nbsp;
-    return (
+<span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;Box component="form" onSubmit={handleSubmit} flex={1}&gt;
         {/* Show Text Field when isEdit true */}
         {isEdit ? (
           &lt;TextField
             fullWidth
             inputRef={inputRef}
-            sx={(theme) =&gt; ({
+            sx={<span class="fstat-no" title="function not covered" >(t</span>heme) =&gt; (<span class="cstat-no" title="statement not covered" >{</span>
               backgroundColor: theme.palette.background.paper,
             })}
             value={editTodo}
@@ -226,7 +226,7 @@ export default TodoEdit;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Fri May 27 2022 13:26:50 GMT+0700 (Western Indonesia Time)
+                at Mon May 30 2022 10:55:18 GMT+0700 (Western Indonesia Time)
             </div>
         <script src="../../../../../prettify.js"></script>
         <script>

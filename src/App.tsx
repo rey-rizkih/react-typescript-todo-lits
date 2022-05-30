@@ -25,7 +25,7 @@ const initialColumns: TodoColumns = {
 const initialTodos: Todos = {
   "active-1": {
     id: "active-1",
-    content: "Task 1",
+    content: "First Task",
     isDone: false,
   },
 };

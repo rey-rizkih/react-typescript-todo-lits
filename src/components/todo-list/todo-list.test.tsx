@@ -1,92 +1,90 @@
-import { cleanup, render, screen, within } from "@testing-library/react";
-// import { DragDropContext } from "react-beautiful-dnd";
-// import TodoList from ".";
-// import type { Todo } from "../../models/models";
-// import {
-//   DND_DIRECTION_UP,
-//   makeDnd,
-//   mockDndSpacing,
-//   mockGetComputedStyle,
-// } from "react-beautiful-dnd-test-utils";
+import { cleanup, render } from "@testing-library/react";
+import TodoList from ".";
+import { TodoColumns, Todos } from "../../models/models";
+import { TodoColumnProps } from "./column";
 
-// const mockTodos: Todo[] = [
-//   {
-//     id: 1,
-//     isDone: false,
-//     todo: "Todo 1",
-//   },
-//   {
-//     id: 2,
-//     isDone: false,
-//     todo: "Todo 2",
-//   },
-// ];
+const columns: TodoColumns = {
+  active: {
+    id: "active",
+    title: "Active Tasks",
+    rowsId: ["active-1"],
+    variant: "secondary",
+  },
+  completed: {
+    id: "completed",
+    title: "Completed Tasks",
+    rowsId: [],
+    variant: "error",
+  },
+};
 
-// const mockCompletedTodos: Todo[] = [
-//   {
-//     id: 3,
-//     isDone: true,
-//     todo: "Completed Todo 1",
-//   },
-//   {
-//     id: 4,
-//     isDone: true,
-//     todo: "Completed Todo",
-//   },
-// ];
+const todos: Todos = {
+  "active-1": {
+    id: "active-1",
+    content: "First Task",
+    isDone: false,
+  },
+};
 
-// const verifyTodosOrderInColumn = (columnTestId:number, orderTodos:string[]) => {
-//   const texts = within(screen.getByTestId(columnTestId)).getAllByText(orderTodos.join(''));
-// }
+const renderTodoList = (props: Partial<TodoColumnProps> = {}) => {
+  render(
+    <TodoList
+      columns={columns}
+      columnOrder={["active", "completed"]}
+      todos={todos}
+      actions={{
+        onEdit: () => {},
+        onDelete: () => {},
+        onDone: () => {},
+      }}
+      {...props}
+    />
+  );
+};
 
-// const renderTodoList = () => {
-//   const { container } = render(
-//     <DragDropContext onDragEnd={() => {}}>
-//       <TodoList
-//         todos={mockTodos}
-//         completedTodos={mockCompletedTodos}
-//         setTodos={() => {}}
-//         setCompletedTodos={() => {}}
-//       />
-//     </DragDropContext>
-//   );
+const mockTodoColumn = jest.fn();
+const mockTodoRow = jest.fn();
 
-//   mockDndSpacing(container);
-// };
+jest.mock("./column", () => (props: unknown) => {
+  mockTodoColumn(props);
+  return <div data-testid="todo-column" {...props}></div>;
+});
 
-// beforeEach(mockGetComputedStyle);
+jest.mock("./rows", () => (props: unknown) => {
+  mockTodoRow(props);
+  return <div data-testid="todo-row"></div>;
+});
 
-// describe("DND TodoList", () => {
-//   it("Move a task up", async () => {
-//     renderTodoList();
+afterEach(cleanup);
 
-//     await makeDnd({
-//       text: mockTodos[1].todo,
-//       direction: DND_DIRECTION_UP,
-//       positions: 1,
-//     });
+it("Should render column correctly", async () => {
+  renderTodoList();
 
-//     ve
-//   });
-// });
+  expect(mockTodoColumn).toHaveBeenCalledWith(
+    expect.objectContaining({
+      column: columns.active,
+    })
+  );
 
-// afterEach(cleanup);
+  expect(mockTodoColumn).toHaveBeenCalledWith(
+    expect.objectContaining({
+      column: columns.completed,
+    })
+  );
+});
 
-// it("Should render TodoList correctly", () => {
-//   renderApp();
+it("Should render row correctly", async () => {
+  renderTodoList();
 
-//   screen.debug();
+  expect(mockTodoRow).toHaveBeenCalledWith(
+    expect.objectContaining({
+      todos: [todos["active-1"]],
+    })
+  );
 
-//   // const activeTask = screen.getByTestId("active-card");
-//   // const completedTask = screen.getByTestId("completed-card");
-
-//   // // Render all mock todos
-//   // for (const key in mockTodos)
-//   //   expect(activeTask).toHaveTextContent(mockTodos[key].todo);
-
-//   // // Render all mock completed todos
-//   // for (const key in mockCompletedTodos)
-//   //   expect(completedTask).toHaveTextContent(mockCompletedTodos[key].todo);
-// });
-
-it("Should change background card when dragging over", () => {});
+  expect(mockTodoRow).toHaveBeenCalledWith(
+    expect.objectContaining({
+      todos: [],
+    })
+  );
+});
