@@ -2,6 +2,7 @@ import { cleanup, render } from "@testing-library/react";
 import TodoList from ".";
 import { TodoColumns, Todos } from "../../models/models";
 import { TodoColumnProps } from "./column";
+import renderer from "react-test-renderer";
 
 const columns: TodoColumns = {
   active: {
@@ -91,4 +92,22 @@ it("Should render row correctly", async () => {
       todos: [],
     })
   );
+});
+
+it("Matches snapshot todo list", () => {
+  const tree = renderer
+    .create(
+      <TodoList
+        columns={columns}
+        columnOrder={["active", "completed"]}
+        todos={todos}
+        actions={{
+          onEdit: () => {},
+          onDelete: () => {},
+          onDone: () => {},
+        }}
+      />
+    )
+    .toJSON();
+  expect(tree).toMatchSnapshot();
 });

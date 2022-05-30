@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Matches snapshot todo list 1`] = `
+<div
+  className="css-fazsao"
+>
+  <div
+    column={
+      Object {
+        "id": "active",
+        "rowsId": Array [
+          "active-1",
+        ],
+        "title": "Active Tasks",
+        "variant": "secondary",
+      }
+    }
+    data-testid="todo-column"
+  >
+    <div
+      data-testid="todo-row"
+    />
+  </div>
+  <div
+    column={
+      Object {
+        "id": "completed",
+        "rowsId": Array [],
+        "title": "Completed Tasks",
+        "variant": "error",
+      }
+    }
+    data-testid="todo-column"
+  >
+    <div
+      data-testid="todo-row"
+    />
+  </div>
+</div>
+`;

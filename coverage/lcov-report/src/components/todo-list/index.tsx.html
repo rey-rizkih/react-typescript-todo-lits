@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -126,31 +126,31 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -176,21 +176,21 @@ export interface TodoListProps {
   actions: TodoItemActionsProps;
 }
 &nbsp;
-const TodoList: React.FC&lt;TodoListProps&gt; = ({
+const TodoList: React.FC&lt;TodoListProps&gt; = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span></span>
   todos,
   columns,
   columnOrder,
   actions,
 }) =&gt; {
-  return (
+<span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;TodoListContainer&gt;
-      {columnOrder.map((columnId) =&gt; {
-        const column = columns[columnId];
+      {columnOrder.map(<span class="fstat-no" title="function not covered" >(c</span>olumnId) =&gt; {
+        const column = <span class="cstat-no" title="statement not covered" >columns[columnId];</span>
 &nbsp;
         // Set todos from column rowsId
-        const todosInColumn = column.rowsId.map((rowId) =&gt; todos[rowId]);
+        const todosInColumn = <span class="cstat-no" title="statement not covered" >column.rowsId.map(<span class="fstat-no" title="function not covered" >(r</span>owId) =&gt; <span class="cstat-no" title="statement not covered" >todos[rowId])</span>;</span>
 &nbsp;
-        return (
+<span class="cstat-no" title="statement not covered" >        return (</span>
           &lt;TodoColumn key={columnId} column={column}&gt;
             &lt;TodoRow todos={todosInColumn} actions={actions} /&gt;
           &lt;/TodoColumn&gt;
@@ -200,7 +200,7 @@ const TodoList: React.FC&lt;TodoListProps&gt; = ({
   );
 };
 &nbsp;
-const TodoListContainer = styled("div")(({ theme }) =&gt; ({
+const TodoListContainer = <span class="cstat-no" title="statement not covered" >styled("div")(<span class="fstat-no" title="function not covered" >({</span> theme }) =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span>
   width: "95%",
   display: "flex",
   marginTop: "10px",
@@ -220,7 +220,7 @@ export default TodoList;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Mon May 30 2022 10:55:18 GMT+0700 (Western Indonesia Time)
+                at Tue May 31 2022 01:42:54 GMT+0700 (Western Indonesia Time)
             </div>
         <script src="../../../prettify.js"></script>
         <script>
