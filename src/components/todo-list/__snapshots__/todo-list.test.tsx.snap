@@ -8,7 +8,7 @@ exports[`Matches snapshot todo list 1`] = `
     column={
       Object {
         "id": "active",
-        "rowsId": Array [
+        "taskIds": Array [
           "active-1",
         ],
         "title": "Active Tasks",
@@ -25,7 +25,7 @@ exports[`Matches snapshot todo list 1`] = `
     column={
       Object {
         "id": "completed",
-        "rowsId": Array [],
+        "taskIds": Array [],
         "title": "Completed Tasks",
         "variant": "error",
       }

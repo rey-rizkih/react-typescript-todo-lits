@@ -4,35 +4,13 @@ import { useState } from "react";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import InputFields from "./components/input-fields";
 import TodoList from "./components/todo-list";
+import { initialTodo } from "./data/todo.data";
 import type { Todos, TodoColumn, TodoColumns } from "./models/models";
 import { reorder } from "./utils/reoder";
 
-const initialColumns: TodoColumns = {
-  active: {
-    id: "active",
-    title: "Active Tasks",
-    rowsId: ["active-1"],
-    variant: "secondary",
-  },
-  completed: {
-    id: "completed",
-    title: "Completed Tasks",
-    rowsId: [],
-    variant: "error",
-  },
-};
-
-const initialTodos: Todos = {
-  "active-1": {
-    id: "active-1",
-    content: "First Task",
-    isDone: false,
-  },
-};
-
 function App() {
-  const [todos, setTodos] = useState<Todos>(initialTodos);
-  const [columns, setColumns] = useState<TodoColumns>(initialColumns);
+  const [todos, setTodos] = useState<Todos>(initialTodo.todos);
+  const [columns, setColumns] = useState<TodoColumns>(initialTodo.columns);
 
   const handleAddTodo = (value: string) => {
     const id = `active-${Date.now().toString()}`;
