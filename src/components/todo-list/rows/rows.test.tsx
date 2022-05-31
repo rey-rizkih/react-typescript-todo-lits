@@ -1,9 +1,10 @@
-import { shallow, configure } from "enzyme";
+import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import TodoRow from ".";
 import type { Todo } from "../../../models/models";
+import renderer from "react-test-renderer";
 
-configure({ adapter: new Adapter() });
+Enzyme.configure({ adapter: new Adapter() });
 
 const todos: Todo[] = [
   {
@@ -13,9 +14,16 @@ const todos: Todo[] = [
   },
 ];
 
-jest.mock("../item");
+const mockTodoItem = jest.fn();
 
-const wrapper = shallow(
+jest.mock("../item", () => (props: unknown) => {
+  mockTodoItem(props);
+  const TodoComponent = "todo-item";
+  //@ts-ignore
+  return <TodoComponent data-testid="todo-item" {...props}></TodoComponent>;
+});
+
+const wrapper = Enzyme.shallow(
   <TodoRow
     todos={todos}
     actions={{
@@ -25,6 +33,7 @@ const wrapper = shallow(
     }}
   />
 );
+
 let container: any, childContainer: any, childContainerProps: any;
 
 describe("TodoRow", () => {
@@ -33,6 +42,8 @@ describe("TodoRow", () => {
   });
 
   it("should render a TodoItem for each todo", () => {
+    // console.log(wrapper.debug());
+
     expect(container).toHaveLength(1);
   });
 
@@ -49,5 +60,21 @@ describe("TodoRow", () => {
     it("should have label as prop", () => {
       expect(childContainerProps.todo).toEqual(todos[0]);
     });
+  });
+
+  it("Matches snapshot todo list", () => {
+    const tree = renderer
+      .create(
+        <TodoRow
+          todos={todos}
+          actions={{
+            onEdit: () => {},
+            onDelete: () => {},
+            onDone: () => {},
+          }}
+        />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });
