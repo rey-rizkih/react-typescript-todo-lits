@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TodoEdit/> rendering renders correctly 1`] = `
+<ForwardRef(Box)
+  component="form"
+  data-testid="edit-box"
+  flex={1}
+  onSubmit={[Function]}
+>
+  <Styled(ForwardRef(Typography))
+    data-testid="edit-title"
+    isDone={false}
+  >
+    test todo
+  </Styled(ForwardRef(Typography))>
+</ForwardRef(Box)>
+`;

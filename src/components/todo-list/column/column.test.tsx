@@ -22,9 +22,9 @@ describe("<TodoColumn/> rendering", () => {
     wrapper = shallow(<TodoColumn {...mockTodoColumnProps} />);
   });
 
-  // it("renders correctly", () => {
-  //   expect(wrapper).toMatchSnapshot();
-  // });
+  it("renders correctly", () => {
+    expect(wrapper).toMatchSnapshot();
+  });
 
   // it("should render one", () => {
   //   expect(wrapper.find("Droppable").prop("children")()).toHaveLength(1);

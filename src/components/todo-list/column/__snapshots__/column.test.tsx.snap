@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TodoColumn/> rendering renders correctly 1`] = `
+<Connect(Droppable)
+  direction="vertical"
+  droppableId="active"
+  getContainerForClone={[Function]}
+  ignoreContainerClipping={false}
+  isCombineEnabled={false}
+  isDropDisabled={false}
+  mode="standard"
+  renderClone={null}
+  type="TASK"
+>
+  <Component />
+</Connect(Droppable)>
+`;

@@ -1,113 +1,67 @@
-import { cleanup, render } from "@testing-library/react";
-import TodoList from ".";
-import { TodoColumns, Todos } from "../../models/models";
-import { TodoColumnProps } from "./column";
-import renderer from "react-test-renderer";
+import { shallow } from "enzyme";
+import TodoList, { TodoListProps } from ".";
 
-const columns: TodoColumns = {
-  active: {
-    id: "active",
-    title: "Active Tasks",
-    rowsId: ["active-1"],
-    variant: "secondary",
+const mockTodoListProps: TodoListProps = {
+  columns: {
+    active: {
+      id: "active",
+      title: "Active Tasks",
+      rowsId: ["active-1"],
+      variant: "secondary",
+    },
+    completed: {
+      id: "completed",
+      title: "Completed Tasks",
+      rowsId: [],
+      variant: "error",
+    },
   },
-  completed: {
-    id: "completed",
-    title: "Completed Tasks",
-    rowsId: [],
-    variant: "error",
+  columnOrder: ["active", "completed"],
+  todos: {
+    "active-1": {
+      id: "active-1",
+      content: "First Task",
+      isDone: false,
+    },
+  },
+  actions: {
+    onEdit: jest.fn(),
+    onDelete: jest.fn(),
+    onDone: jest.fn(),
   },
 };
 
-const todos: Todos = {
-  "active-1": {
-    id: "active-1",
-    content: "First Task",
-    isDone: false,
-  },
+const testId = {
+  container: '[data-testid="todolist-container"]',
+  column: '[data-testid="todolist-column"]',
+  row: '[data-testid="todolist-row"]',
 };
 
-const renderTodoList = (props: Partial<TodoColumnProps> = {}) => {
-  render(
-    <TodoList
-      columns={columns}
-      columnOrder={["active", "completed"]}
-      todos={todos}
-      actions={{
-        onEdit: () => {},
-        onDelete: () => {},
-        onDone: () => {},
-      }}
-      {...props}
-    />
-  );
-};
+let wrapper;
 
-const mockTodoColumn = jest.fn();
-const mockTodoRow = jest.fn();
+describe("<TodoList/> rendering", () => {
+  beforeEach(() => {
+    wrapper = shallow(<TodoList {...mockTodoListProps} />);
+  });
 
-jest.mock("./column", () => (props: unknown) => {
-  mockTodoColumn(props);
-  return <div data-testid="todo-column" {...props}></div>;
-});
+  it("renders correctly", () => {
+    expect(wrapper).toMatchSnapshot();
+  });
 
-jest.mock("./rows", () => (props: unknown) => {
-  mockTodoRow(props);
-  return <div data-testid="todo-row"></div>;
-});
+  it("should render one", () => {
+    const container = wrapper.find(testId.container);
+    expect(container).toHaveLength(1);
+  });
 
-afterEach(cleanup);
+  it("should render <TodoColumn/> for each column", () => {
+    expect(wrapper.find(testId.column)).toHaveLength(
+      mockTodoListProps.columnOrder.length
+    );
+  });
 
-it("Should render column correctly", async () => {
-  renderTodoList();
-
-  // Checking column component props
-  expect(mockTodoColumn).toHaveBeenCalledWith(
-    expect.objectContaining({
-      column: columns.active,
-    })
-  );
-
-  // Checking column component props
-  expect(mockTodoColumn).toHaveBeenCalledWith(
-    expect.objectContaining({
-      column: columns.completed,
-    })
-  );
-});
-
-it("Should render row correctly", async () => {
-  renderTodoList();
-
-  // Checking row component props
-  expect(mockTodoRow).toHaveBeenCalledWith(
-    expect.objectContaining({
-      todos: [todos["active-1"]],
-    })
-  );
-
-  // Checking row component props
-  expect(mockTodoRow).toHaveBeenCalledWith(
-    expect.objectContaining({
-      todos: [],
-    })
-  );
-});
-
-it("Matches snapshot todo list", () => {
-  const tree = renderer
-    .create(
-      <TodoList
-        columns={columns}
-        columnOrder={["active", "completed"]}
-        todos={todos}
-        actions={{
-          onEdit: () => {},
-          onDelete: () => {},
-          onDone: () => {},
-        }}
-      />
-    )
-    .toJSON();
-  expect(tree).toMatchSnapshot();
+  it("should render <TodoRow/> for each column", () => {
+    expect(wrapper.find(testId.row)).toHaveLength(
+      mockTodoListProps.columnOrder.length
+    );
+  });
 });

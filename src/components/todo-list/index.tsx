@@ -18,7 +18,7 @@ const TodoList: React.FC<TodoListProps> = ({
   actions,
 }) => {
   return (
-    <TodoListContainer>
+    <TodoListContainer data-testid="todolist-container">
       {columnOrder.map((columnId) => {
         const column = columns[columnId];
 
@@ -26,8 +26,16 @@ const TodoList: React.FC<TodoListProps> = ({
         const todosInColumn = column.rowsId.map((rowId) => todos[rowId]);
 
         return (
-          <TodoColumn key={columnId} column={column}>
-            <TodoRow todos={todosInColumn} actions={actions} />
+          <TodoColumn
+            key={columnId}
+            column={column}
+            data-testid="todolist-column"
+          >
+            <TodoRow
+              todos={todosInColumn}
+              actions={actions}
+              data-testid="todolist-row"
+            />
           </TodoColumn>
         );
       })}

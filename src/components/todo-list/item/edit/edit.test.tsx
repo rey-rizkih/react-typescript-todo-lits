@@ -1,95 +1,97 @@
-import { cleanup, render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import TodoEdit from ".";
-import type { Todo } from "../../../../models/models";
-import renderer from "react-test-renderer";
+import { shallow } from "enzyme";
+import TodoEdit, { TodoEditProps } from ".";
 
-const mockTodo: Todo = {
-  id: "123",
+const mockEditTodoProps: TodoEditProps = {
+  isEdit: false,
   isDone: false,
-  content: "test todo",
+  value: "test todo",
+  onSubmit: jest.fn(),
 };
 
-afterEach(cleanup);
+const testId = {
+  box: '[data-testid="edit-box"]',
+  textField: '[data-testid="edit-text-field"]',
+  title: '[data-testid="edit-title"]',
+};
 
-it("Rendered a title when isEdit false", () => {
-  render(
-    <TodoEdit isEdit={false} value={mockTodo.content} onSubmit={() => {}} />
-  );
-  const title = screen.getByText(mockTodo.content);
+let wrapper;
 
-  expect(title).toHaveTextContent(mockTodo.content);
-});
+describe("<TodoEdit/> rendering", () => {
+  beforeEach(() => {
+    wrapper = shallow(<TodoEdit {...mockEditTodoProps} />);
+  });
 
-it("Rendered a input field when isEdit true", () => {
-  render(<TodoEdit isEdit value={mockTodo.content} onSubmit={() => {}} />);
-  const inputField = screen.getByRole("textbox");
+  it("renders correctly", () => {
+    expect(wrapper).toMatchSnapshot();
+  });
 
-  expect(inputField).toHaveValue(mockTodo.content);
-});
+  it("should render one", () => {
+    const box = wrapper.find(testId.box);
+    expect(box).toHaveLength(1);
+  });
 
-it("Should be able to edit a value", () => {
-  render(<TodoEdit isEdit value={mockTodo.content} onSubmit={() => {}} />);
-  const inputField = screen.getByRole("textbox");
+  it("should not render <TextField/> one when isEdit false", () => {
+    const textField = wrapper.find(testId.textField);
+    expect(textField).toHaveLength(0);
+  });
 
-  userEvent.type(inputField, " edit");
+  it("should render <TodoTitle/> one when isEdit false", () => {
+    const title = wrapper.find(testId.title);
+    expect(title).toHaveLength(1);
+  });
 
-  expect(inputField).toHaveValue(`${mockTodo.content} edit`);
-});
+  it('shoudl have isDone prop as "true" when isDone true', () => {
+    wrapper.setProps({ isDone: true });
 
-it("Should be submit when submit button clicked", () => {
-  const handleSubmitTest = jest.fn();
+    const title = wrapper.find(testId.title);
+    expect(title.prop("isDone")).toBe(true);
+  });
 
-  render(
-    <TodoEdit isEdit value={mockTodo.content} onSubmit={handleSubmitTest} />
-  );
-  const inputField = screen.getByRole("textbox");
+  describe("Rendering when isEdit is true", () => {
+    beforeEach(() => {
+      wrapper.setProps({ isEdit: true });
+    });
 
-  userEvent.type(inputField, " edit{enter}");
+    it("should render <TextField/> one when isEdit true", () => {
+      const textField = wrapper.find(testId.textField);
+      expect(textField).toHaveLength(1);
+    });
 
-  expect(handleSubmitTest).toHaveBeenCalledTimes(1);
-});
+    it("should not render <TodoTitle/> when isEdit true", () => {
+      const title = wrapper.find(testId.title);
+      expect(title).toHaveLength(0);
+    });
 
-it("Should not be submit when value is empty", () => {
-  const handleSubmitTest = jest.fn();
+    describe("<TodoEdit/> editing interactions", () => {
+      it("should change props value when input value changed", () => {
+        wrapper
+          .find(testId.textField)
+          .simulate("change", { target: { value: "test" } });
 
-  render(
-    <TodoEdit isEdit value={mockTodo.content} onSubmit={handleSubmitTest} />
-  );
-  const inputField = screen.getByRole("textbox");
+        expect(wrapper.find(testId.textField).prop("value")).toBe("test");
+      });
 
-  userEvent.clear(inputField);
-  userEvent.type(inputField, "{enter}");
+      it("should not call onSubmit when value is empty", () => {
+        wrapper.find(testId.textField).simulate("change", {
+          target: { value: "" },
+        });
 
-  expect(handleSubmitTest).not.toBeCalled();
-});
+        wrapper.find(testId.textField).simulate("blur");
 
-it("Should not be submit when only whitespace", () => {
-  const handleSubmitTest = jest.fn();
+        expect(mockEditTodoProps.onSubmit).not.toHaveBeenCalled();
+      });
 
-  render(
-    <TodoEdit isEdit value={mockTodo.content} onSubmit={handleSubmitTest} />
-  );
-  const inputField = screen.getByRole("textbox");
+      it("should call onSubmit when submit form", () => {
+        wrapper
+          .find(testId.textField)
+          .simulate("change", { target: { value: "test" } });
 
-  userEvent.clear(inputField);
-  userEvent.type(inputField, " {enter}");
+        wrapper.find(testId.box).simulate("submit", {
+          preventDefault: () => {},
+        });
 
-  expect(handleSubmitTest).not.toBeCalled();
-});
-
-it("Matches snapshot isEdit", () => {
-  const tree = renderer
-    .create(<TodoEdit isEdit value={mockTodo.content} onSubmit={() => {}} />)
-    .toJSON();
-  expect(tree).toMatchSnapshot();
-});
-
-it("Matches snapshot isNotEdit", () => {
-  const tree = renderer
-    .create(
-      <TodoEdit isEdit={false} value={mockTodo.content} onSubmit={() => {}} />
-    )
-    .toJSON();
-  expect(tree).toMatchSnapshot();
+        expect(mockEditTodoProps.onSubmit).toHaveBeenCalledTimes(1);
+      });
+    });
+  });
 });

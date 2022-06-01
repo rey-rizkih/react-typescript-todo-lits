@@ -1,7 +1,7 @@
-import { render, cleanup, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { shallow } from "enzyme";
 import TodoAction, { TodoActionProps } from ".";
-import renderer from "react-test-renderer";
+
+let wrapper;
 
 const mockActionProps: TodoActionProps = {
   onDelete: jest.fn(),
@@ -9,43 +9,49 @@ const mockActionProps: TodoActionProps = {
   onDone: jest.fn(),
 };
 
-const renderTodoAction = (props: TodoActionProps) => {
-  render(<TodoAction {...props} />);
+const testId = {
+  actionContainer: '[data-testid="action-container"]',
+  editButton: '[data-testid="edit-button"]',
+  deleteButton: '[data-testid="delete-button"]',
+  doneButton: '[data-testid="check-button"]',
 };
 
-afterEach(cleanup);
+describe("<TodoAction/> rendering", () => {
+  beforeEach(() => {
+    wrapper = shallow(<TodoAction {...mockActionProps} />);
+  });
 
-it("Should be call a edit function", () => {
-  renderTodoAction(mockActionProps);
+  it("renders correctly", () => {
+    expect(wrapper).toMatchSnapshot();
+  });
 
-  const editButton = screen.getByRole("button", { name: "edit todo" });
+  it("should render one", () => {
+    expect(wrapper.find(testId.actionContainer)).toHaveLength(1);
+  });
 
-  userEvent.click(editButton);
+  it("should render <IconButton/> for each todo", () => {
+    expect(wrapper.find(testId.editButton)).toHaveLength(1);
+    expect(wrapper.find(testId.deleteButton)).toHaveLength(1);
+    expect(wrapper.find(testId.doneButton)).toHaveLength(1);
+  });
 
-  expect(mockActionProps.onEdit).toHaveBeenCalledTimes(1);
-});
+  describe("<TodoAction/> interactions", () => {
+    it("should call onDelete when delete button clicked", () => {
+      wrapper.find(testId.deleteButton).simulate("click");
 
-it("Should be call a delete function", () => {
-  renderTodoAction(mockActionProps);
+      expect(mockActionProps.onDelete).toHaveBeenCalled();
+    });
 
-  const deleteButton = screen.getByRole("button", { name: "delete todo" });
+    it("should call onEdit when edit button clicked", () => {
+      wrapper.find(testId.editButton).simulate("click");
 
-  userEvent.click(deleteButton);
+      expect(mockActionProps.onEdit).toHaveBeenCalled();
+    });
 
-  expect(mockActionProps.onDelete).toHaveBeenCalledTimes(1);
-});
+    it("should call onDone when done button clicked", () => {
+      wrapper.find(testId.doneButton).simulate("click");
 
-it("Should be call a check function", () => {
-  renderTodoAction(mockActionProps);
-
-  const checkButton = screen.getByRole("button", { name: "check todo" });
-
-  userEvent.click(checkButton);
-
-  expect(mockActionProps.onDone).toHaveBeenCalledTimes(1);
-});
-
-it("Matches snapshot todo action", () => {
-  const tree = renderer.create(<TodoAction {...mockActionProps} />).toJSON();
-  expect(tree).toMatchSnapshot();
+      expect(mockActionProps.onDone).toHaveBeenCalled();
+    });
+  });
 });

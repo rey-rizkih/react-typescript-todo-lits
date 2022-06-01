@@ -16,16 +16,31 @@ const TodoAction: React.FC<TodoActionProps> = ({
   onDone,
 }) => {
   return (
-    <ActionContainer>
-      <IconButton color="inherit" aria-label="edit todo" onClick={onEdit}>
+    <ActionContainer data-testid="action-container">
+      <IconButton
+        color="inherit"
+        aria-label="edit todo"
+        onClick={onEdit}
+        data-testid="edit-button"
+      >
         <Edit />
       </IconButton>
 
-      <IconButton color="inherit" aria-label="delete todo" onClick={onDelete}>
+      <IconButton
+        color="inherit"
+        aria-label="delete todo"
+        onClick={onDelete}
+        data-testid="delete-button"
+      >
         <Delete />
       </IconButton>
 
-      <IconButton color="inherit" aria-label="check todo" onClick={onDone}>
+      <IconButton
+        color="inherit"
+        aria-label="check todo"
+        onClick={onDone}
+        data-testid="check-button"
+      >
         <Check />
       </IconButton>
     </ActionContainer>

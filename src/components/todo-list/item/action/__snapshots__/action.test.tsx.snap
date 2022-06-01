@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TodoAction/> rendering renders correctly 1`] = `
+<Styled(div)
+  data-testid="action-container"
+>
+  <ForwardRef(IconButton)
+    aria-label="edit todo"
+    color="inherit"
+    data-testid="edit-button"
+    onClick={[MockFunction]}
+  >
+    <Memo(ForwardRef(EditIcon)) />
+  </ForwardRef(IconButton)>
+  <ForwardRef(IconButton)
+    aria-label="delete todo"
+    color="inherit"
+    data-testid="delete-button"
+    onClick={[MockFunction]}
+  >
+    <Memo(ForwardRef(DeleteIcon)) />
+  </ForwardRef(IconButton)>
+  <ForwardRef(IconButton)
+    aria-label="check todo"
+    color="inherit"
+    data-testid="check-button"
+    onClick={[MockFunction]}
+  >
+    <Memo(ForwardRef(CheckIcon)) />
+  </ForwardRef(IconButton)>
+</Styled(div)>
+`;

@@ -39,7 +39,7 @@ describe("<InputField/> rendering", () => {
   });
 
   describe("<InputField/> Interactions", () => {
-    it("should change state inputValue when input value changed", () => {
+    it("should change value when input value changed", () => {
       wrapper
         .find(testId.input)
         .simulate("change", { target: { value: "test" } });

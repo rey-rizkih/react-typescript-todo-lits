@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TodoTitle/> rendering renders correctly 1`] = `
+<Fragment>
+  <Insertion
+    cache={
+      Object {
+        "insert": [Function],
+        "inserted": Object {},
+        "key": "css",
+        "nonce": undefined,
+        "registered": Object {},
+        "sheet": StyleSheet {
+          "_insertTag": [Function],
+          "before": null,
+          "container": <head />,
+          "ctr": 0,
+          "insertionPoint": undefined,
+          "isSpeedy": false,
+          "key": "css",
+          "nonce": undefined,
+          "prepend": undefined,
+          "tags": Array [],
+        },
+      }
+    }
+    isStringTag={false}
+    serialized={
+      Object {
+        "map": undefined,
+        "name": "16zvr0n",
+        "next": undefined,
+        "styles": "flex:1;padding:5px;border:none;font-size:20px;",
+        "toString": [Function],
+      }
+    }
+  />
+  <ForwardRef(Typography)
+    className="css-16zvr0n"
+    data-testid="todo-title"
+  >
+    Test Title
+  </ForwardRef(Typography)>
+</Fragment>
+`;
+
+exports[`<TodoTitle/> renders correctly 1`] = `
+<Fragment>
+  <Insertion
+    cache={
+      Object {
+        "insert": [Function],
+        "inserted": Object {},
+        "key": "css",
+        "nonce": undefined,
+        "registered": Object {},
+        "sheet": StyleSheet {
+          "_insertTag": [Function],
+          "before": null,
+          "container": <head />,
+          "ctr": 0,
+          "insertionPoint": undefined,
+          "isSpeedy": false,
+          "key": "css",
+          "nonce": undefined,
+          "prepend": undefined,
+          "tags": Array [],
+        },
+      }
+    }
+    isStringTag={false}
+    serialized={
+      Object {
+        "map": undefined,
+        "name": "16zvr0n",
+        "next": undefined,
+        "styles": "flex:1;padding:5px;border:none;font-size:20px;",
+        "toString": [Function],
+      }
+    }
+  />
+  <ForwardRef(Typography)
+    className="css-16zvr0n"
+    data-testid="todo-title"
+  >
+    Test Title
+  </ForwardRef(Typography)>
+</Fragment>
+`;

@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TodoList/> rendering renders correctly 1`] = `
+<Styled(div)
+  data-testid="todolist-container"
+>
+  <TodoColumn
+    column={
+      Object {
+        "id": "active",
+        "rowsId": Array [
+          "active-1",
+        ],
+        "title": "Active Tasks",
+        "variant": "secondary",
+      }
+    }
+    data-testid="todolist-column"
+    key="active"
+  >
+    <TodoRow
+      actions={
+        Object {
+          "onDelete": [MockFunction],
+          "onDone": [MockFunction],
+          "onEdit": [MockFunction],
+        }
+      }
+      data-testid="todolist-row"
+      todos={
+        Array [
+          Object {
+            "content": "First Task",
+            "id": "active-1",
+            "isDone": false,
+          },
+        ]
+      }
+    />
+  </TodoColumn>
+  <TodoColumn
+    column={
+      Object {
+        "id": "completed",
+        "rowsId": Array [],
+        "title": "Completed Tasks",
+        "variant": "error",
+      }
+    }
+    data-testid="todolist-column"
+    key="completed"
+  >
+    <TodoRow
+      actions={
+        Object {
+          "onDelete": [MockFunction],
+          "onDone": [MockFunction],
+          "onEdit": [MockFunction],
+        }
+      }
+      data-testid="todolist-row"
+      todos={Array []}
+    />
+  </TodoColumn>
+</Styled(div)>
+`;

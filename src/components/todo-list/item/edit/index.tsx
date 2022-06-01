@@ -28,7 +28,12 @@ const TodoEdit = forwardRef<HTMLInputElement, TodoEditProps>(
     };
 
     return (
-      <Box component="form" onSubmit={handleSubmit} flex={1}>
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        flex={1}
+        data-testid="edit-box"
+      >
         {/* Show Text Field when isEdit true */}
         {isEdit ? (
           <TextField
@@ -39,10 +44,13 @@ const TodoEdit = forwardRef<HTMLInputElement, TodoEditProps>(
             })}
             value={editTodo}
             onChange={handleOnInputChange}
+            data-testid="edit-text-field"
           />
         ) : (
           // Show Title when isEdit false
-          <TodoTitle isDone={isDone}>{value}</TodoTitle>
+          <TodoTitle isDone={isDone} data-testid="edit-title">
+            {value}
+          </TodoTitle>
         )}
       </Box>
     );
