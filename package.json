@@ -5,9 +5,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --verbose --coverage",
+    "test-watch": "react-scripts test --verbose --coverage",
     "eject": "react-scripts eject",
-    "test-new": "jest -c test/jest.config.js"
+    "test": "jest -c test/jest.config.js"
   },
   "eslintConfig": {
     "extends": [

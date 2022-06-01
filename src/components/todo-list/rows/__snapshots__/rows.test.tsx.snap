@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TodoRow/> rendering renders correctly 1`] = `
+<Fragment>
+  <TodoItem
+    actions={
+      Object {
+        "onDelete": [MockFunction],
+        "onDone": [MockFunction],
+        "onEdit": [MockFunction],
+      }
+    }
+    index={0}
+    key="active-1"
+    todo={
+      Object {
+        "content": "Todo 1",
+        "id": "active-1",
+        "isDone": false,
+      }
+    }
+  />
+  <TodoItem
+    actions={
+      Object {
+        "onDelete": [MockFunction],
+        "onDone": [MockFunction],
+        "onEdit": [MockFunction],
+      }
+    }
+    index={1}
+    key="active-2"
+    todo={
+      Object {
+        "content": "Todo 2",
+        "id": "active-2",
+        "isDone": false,
+      }
+    }
+  />
+</Fragment>
+`;

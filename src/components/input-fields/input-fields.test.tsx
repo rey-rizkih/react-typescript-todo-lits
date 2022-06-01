@@ -1,106 +1,72 @@
-import { cleanup, render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { shallow } from "enzyme";
 import InputField from ".";
-import renderer from "react-test-renderer";
 
-afterEach(cleanup);
+const mockInputFieldProps = {
+  defaultValue: "",
+  onSubmit: jest.fn(),
+};
 
-const testValue = "test value";
+const testId = {
+  form: '[data-testid="form-field"]',
+  input: '[data-testid="input-field"]',
+  button: '[data-testid="submit-button"]',
+};
 
-it("Rendered in window", () => {
-  render(<InputField onSubmit={() => {}} />);
-  const inputField = screen.getByRole("textbox");
+let wrapper;
 
-  expect(inputField).toBeInTheDocument();
-});
+describe("<InputField/> rendering", () => {
+  beforeEach(() => {
+    wrapper = shallow(<InputField {...mockInputFieldProps} />);
+  });
 
-it("Rendered with default value", () => {
-  render(<InputField defaultValue={testValue} onSubmit={() => {}} />);
-  const inputField = screen.getByRole("textbox");
+  it("renders correctly", () => {
+    expect(wrapper).toMatchSnapshot();
+  });
 
-  expect(inputField).toHaveValue(testValue);
-});
+  it("should render one", () => {
+    const form = wrapper.find(testId.form);
+    expect(form).toHaveLength(1);
+  });
 
-it("Should be able to input a value", () => {
-  render(<InputField onSubmit={() => {}} />);
-  const inputField = screen.getByRole("textbox");
+  it("should render <InputStyled/> one", () => {
+    const input = wrapper.find(testId.input);
+    expect(input).toHaveLength(1);
+  });
 
-  userEvent.type(inputField, testValue);
+  it("should render <ButtonSubmit/> one", () => {
+    const button = wrapper.find(testId.button);
+    expect(button).toHaveLength(1);
+  });
 
-  expect(inputField).toHaveValue(testValue);
-});
+  describe("<InputField/> Interactions", () => {
+    it("should change state inputValue when input value changed", () => {
+      wrapper
+        .find(testId.input)
+        .simulate("change", { target: { value: "test" } });
 
-it("Should be submit when submit button clicked", () => {
-  const handleSubmitTest = jest.fn();
+      expect(wrapper.find(testId.input).prop("value")).toBe("test");
+    });
 
-  render(<InputField onSubmit={handleSubmitTest} />);
-  const inputField = screen.getByRole("textbox");
-  const submitButton = screen.getByTestId("submit-input-field");
+    it("should not call onSubmit when value is empty", () => {
+      wrapper.find(testId.input).simulate("change", { target: { value: "" } });
 
-  userEvent.type(inputField, testValue);
-  userEvent.click(submitButton);
+      wrapper.find(testId.form).simulate("submit", {
+        preventDefault: () => {},
+      });
 
-  expect(handleSubmitTest).toHaveBeenCalledTimes(1);
-});
+      expect(mockInputFieldProps.onSubmit).not.toHaveBeenCalled();
+    });
 
-it("Should be submit when press enter on keyboard", () => {
-  const handleSubmitTest = jest.fn();
+    it("should call onSubmit when submit form", () => {
+      wrapper
+        .find(testId.input)
+        .simulate("change", { target: { value: "test" } });
 
-  render(<InputField onSubmit={handleSubmitTest} />);
-  const inputField = screen.getByRole("textbox");
+      wrapper.find(testId.form).simulate("submit", {
+        preventDefault: () => {},
+      });
 
-  userEvent.type(inputField, `${testValue}{enter}`);
-
-  expect(handleSubmitTest).toHaveBeenCalledTimes(1);
-});
-
-it("Should be clear value when submit", () => {
-  const handleSubmitTest = jest.fn();
-
-  render(<InputField onSubmit={handleSubmitTest} />);
-  const inputField = screen.getByRole("textbox");
-
-  userEvent.type(inputField, `${testValue}{enter}`);
-
-  expect(inputField).toHaveValue("");
-});
-
-it("Should be blur when submit", () => {
-  const handleSubmitTest = jest.fn();
-
-  render(<InputField onSubmit={handleSubmitTest} />);
-  const inputField = screen.getByRole("textbox");
-
-  userEvent.type(inputField, `${testValue}{enter}`);
-
-  expect(inputField).not.toHaveFocus();
-});
-
-it("Should be not submit when value is empty", () => {
-  const handleSubmitTest = jest.fn();
-
-  render(<InputField onSubmit={handleSubmitTest} />);
-  const inputField = screen.getByRole("textbox");
-
-  userEvent.clear(inputField);
-  userEvent.type(inputField, `{enter}`);
-
-  expect(handleSubmitTest).not.toBeCalled();
-});
-
-it("Should not be submit when only whitespace", () => {
-  const handleSubmitTest = jest.fn();
-
-  render(<InputField onSubmit={handleSubmitTest} />);
-  const inputField = screen.getByRole("textbox");
-
-  userEvent.clear(inputField);
-  userEvent.type(inputField, " {enter}");
-
-  expect(handleSubmitTest).not.toBeCalled();
-});
-
-it("Matches snapshot", () => {
-  const tree = renderer.create(<InputField onSubmit={() => {}} />).toJSON();
-  expect(tree).toMatchSnapshot();
+      expect(mockInputFieldProps.onSubmit).toHaveBeenCalledTimes(1);
+    });
+  });
 });

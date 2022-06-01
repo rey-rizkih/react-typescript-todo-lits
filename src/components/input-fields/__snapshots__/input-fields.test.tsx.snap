@@ -1,46 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Matches snapshot 1`] = `
-<form
-  className="css-1twqd9l"
-  data-testid="input-field"
+exports[`<InputField/> rendering renders correctly 1`] = `
+<Styled(form)
+  data-testid="form-field"
   onSubmit={[Function]}
 >
-  <div
-    className="MuiInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-sizeSmall css-15bpqv6-MuiInputBase-root-MuiInput-root"
-    onClick={[Function]}
-  >
-    <input
-      className="MuiInput-input MuiInputBase-input MuiInputBase-inputSizeSmall css-nz481w-MuiInputBase-input-MuiInput-input"
-      onAnimationStart={[Function]}
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
-      placeholder="Enter a Task"
-      type="text"
-      value=""
-    />
-  </div>
-  <button
-    className="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root css-139khv7-MuiButtonBase-root-MuiButton-root"
-    data-testid="submit-input-field"
-    disabled={false}
-    onBlur={[Function]}
-    onContextMenu={[Function]}
-    onDragLeave={[Function]}
-    onFocus={[Function]}
-    onKeyDown={[Function]}
-    onKeyUp={[Function]}
-    onMouseDown={[Function]}
-    onMouseLeave={[Function]}
-    onMouseUp={[Function]}
-    onTouchEnd={[Function]}
-    onTouchMove={[Function]}
-    onTouchStart={[Function]}
-    tabIndex={0}
+  <Styled(ForwardRef(Input))
+    data-testid="input-field"
+    disableUnderline={true}
+    inputRef={
+      Object {
+        "current": null,
+      }
+    }
+    onChange={[Function]}
+    placeholder="Enter a Task"
+    size="small"
+    value=""
+  />
+  <Styled(ForwardRef(Button))
+    data-testid="submit-button"
     type="submit"
   >
     Go
-  </button>
-</form>
+  </Styled(ForwardRef(Button))>
+</Styled(form)>
 `;

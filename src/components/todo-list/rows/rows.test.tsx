@@ -1,53 +1,44 @@
-import { shallow, configure } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import TodoRow from ".";
-import type { Todo } from "../../../models/models";
+import { shallow } from "enzyme";
+import TodoRow, { TodoRowProps } from ".";
 
-configure({ adapter: new Adapter() });
-
-const todos: Todo[] = [
-  {
-    id: "active-1",
-    content: "Todo 1",
-    isDone: false,
+const mockTodoRowProps: TodoRowProps = {
+  todos: [
+    {
+      id: "active-1",
+      content: "Todo 1",
+      isDone: false,
+    },
+    {
+      id: "active-2",
+      content: "Todo 2",
+      isDone: false,
+    },
+  ],
+  actions: {
+    onEdit: jest.fn(),
+    onDelete: jest.fn(),
+    onDone: jest.fn(),
   },
-];
+};
 
-jest.mock("../item");
+let wrapper;
 
-const wrapper = shallow(
-  <TodoRow
-    todos={todos}
-    actions={{
-      onEdit: () => {},
-      onDelete: () => {},
-      onDone: () => {},
-    }}
-  />
-);
-let container: any, childContainer: any, childContainerProps: any;
-
-describe("TodoRow", () => {
+describe("<TodoRow/> rendering", () => {
   beforeEach(() => {
-    container = wrapper.find("Fragment");
+    wrapper = shallow(<TodoRow {...mockTodoRowProps} />);
   });
 
-  it("should render a TodoItem for each todo", () => {
-    expect(container).toHaveLength(1);
+  it("renders correctly", () => {
+    expect(wrapper).toMatchSnapshot();
   });
 
-  describe("Child component", () => {
-    beforeEach(() => {
-      childContainer = wrapper.find("TodoItem");
-      childContainerProps = childContainer.props();
-    });
+  it("should render one", () => {
+    expect(wrapper.find("Fragment")).toHaveLength(1);
+  });
 
-    it("should have a <TodoItem>", () => {
-      expect(childContainer).toHaveLength(1);
-    });
-
-    it("should have label as prop", () => {
-      expect(childContainerProps.todo).toEqual(todos[0]);
-    });
+  it("should render <TodoItem/> for each todo", () => {
+    expect(wrapper.find("TodoItem")).toHaveLength(
+      mockTodoRowProps.todos.length
+    );
   });
 });

@@ -30,7 +30,7 @@ const InputField: React.FC<InputFieldsProps> = ({
   };
 
   return (
-    <FormField onSubmit={handleSubmit} data-testid="input-field">
+    <FormField onSubmit={handleSubmit} data-testid="form-field">
       <InputStyled
         // Pass ref to input element
         inputRef={inputRef}
@@ -39,8 +39,9 @@ const InputField: React.FC<InputFieldsProps> = ({
         placeholder="Enter a Task"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
+        data-testid="input-field"
       />
-      <ButtonSubmit type="submit" data-testid="submit-input-field">
+      <ButtonSubmit type="submit" data-testid="submit-button">
         Go
       </ButtonSubmit>
     </FormField>

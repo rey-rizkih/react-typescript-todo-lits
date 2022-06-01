@@ -1,18 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Matches snapshot 1`] = `
-<div
-  className="MuiInput-root MuiInput-underline MuiInputBase-root MuiInputBase-colorPrimary css-1u5vszn-MuiInputBase-root-MuiInput-root"
-  onClick={[Function]}
->
-  <input
-    className="MuiInput-input MuiInputBase-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
-    data-testid="input"
-    onAnimationStart={[Function]}
-    onBlur={[Function]}
-    onChange={[Function]}
-    onFocus={[Function]}
-    type="text"
+exports[`<Input/> rendering renders correctly 1`] = `
+<Fragment>
+  <Insertion
+    cache={
+      Object {
+        "insert": [Function],
+        "inserted": Object {},
+        "key": "css",
+        "nonce": undefined,
+        "registered": Object {},
+        "sheet": StyleSheet {
+          "_insertTag": [Function],
+          "before": null,
+          "container": <head />,
+          "ctr": 0,
+          "insertionPoint": undefined,
+          "isSpeedy": false,
+          "key": "css",
+          "nonce": undefined,
+          "prepend": undefined,
+          "tags": Array [],
+        },
+      }
+    }
+    isStringTag={false}
+    serialized={
+      Object {
+        "map": undefined,
+        "name": "ytn2i7",
+        "next": undefined,
+        "styles": "width:100%;border-radius:50px;padding:20px 30px;font-size:25px;border:none;background-color:white;transition:0.2s;box-shadow:inset 0 0 5px black;font-family:Arial;line-height:normal;:focus-within{box-shadow:0 0 10px 1000px rgba(0, 0, 0, 0.5);outline:none;}.MuiInput-input{padding:0;height:auto;}",
+        "toString": [Function],
+      }
+    }
   />
-</div>
+  <ForwardRef(Input)
+    className="css-ytn2i7"
+    data-testid="input"
+  />
+</Fragment>
 `;
